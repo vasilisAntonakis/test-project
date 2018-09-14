@@ -1,0 +1,7 @@
+packages
+TestResults
+.vs
+MVC/bin
+MVC/obj
+WebAPI/bin
+WebAPI/obj

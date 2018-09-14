@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Test Project";
+}
+
+<div class="jumbotron">
+    <h1>Test Project</h1>
+    <p>This is a demo project to get hands on web development in c#. You can view and add Lawyers, Titles and Genders. You can also update a Lawyer. Delete is not implemented</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Lawyers</h2>
+        <p>view lawyers list, add or update a lawyer.</p>
+        <p>@Html.ActionLink("Lawyers", "Index", new { controller = "Lawyers" }, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Titles</h2>
+        <p>view titles list. You can also add a title. Update is not yet implemented.</p>
+        <p>@Html.ActionLink("Titles", "Index", new { controller = "Titles" }, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Genders</h2>
+        <p>view genders list. You can also add a gender. Update is not yet implemented.</p>
+        <p>@Html.ActionLink("Genders", "Index", new { controller = "Genders" }, new { @class = "btn btn-default" })</p>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<WebAPI.Model.Lawyer>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var parameters = ViewData["parameters"] as WebAPI.Model.LawyerSearchParameters;
+}
+
+@section Styles{
+    <style>
+
+        .status {
+            margin-top: 3px;
+            height: 15px;
+            width: 15px;
+            border-radius: 15px;
+        }
+
+        .active {
+            background-color: yellowgreen;
+        }
+
+        .inactive {
+            background-color: grey;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1em 0;
+        }
+
+        .search {
+            width: 12em;
+        }
+    </style>
+}
+
+<h2>Lawyers</h2>
+
+@using (Html.BeginForm("Index", "Lawyers", FormMethod.Post, new { @class = "form-inline" }))
+{
+    <span class="form-check">
+        @Html.CheckBox("IncludeGender", parameters.IncludeGender, new { @class = "form-check-input" })
+        @Html.Label("IncludeGender", "Include Gender", new { @class = "form-check-label" })
+    </span>
+    <span class="form-check">
+        @Html.CheckBox("IncludeTitle", parameters.IncludeTitle, new { @class = "form-check-input" })
+        @Html.Label("IncludeTitle", "Include Title", new { @class = "form-check-label" })
+    </span>
+    <span class="form-check">
+        @Html.CheckBox("IncludeInactive", parameters.IncludeInactive, new { @class = "form-check-input" })
+        @Html.Label("IncludeInactive", "Include Inactive Records", new { @class = "form-check-label" })
+    </span>
+
+    @Html.Label("Name", new { @class = "sr-only" })
+    @Html.TextBox("Name", parameters.Name, new { @class = "form-control", placeholder = "Search by Name" });
+
+    @Html.Label("Surname", new { @class = "sr-only" })
+    @Html.TextBox("Surname", parameters.Surname, new { @class = "form-control", placeholder = "Search by Surname" });
+
+    <button type="submit" class="btn btn-primary search">Search</button>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Initials)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        @if (parameters.IncludeGender)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+        }
+        @if (parameters.IncludeTitle)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>Edit</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Initials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            @if (parameters.IncludeGender)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender.Description)
+                </td>
+            }
+            @if (parameters.IncludeTitle)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title.Description)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <div class="status @(item.Active == true ? "active" : "inactive")"></div>
+            </td>
+            <td>
+                @if (item.Active == true)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

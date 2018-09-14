@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebAPI.Model.Gender>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Genders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateRecStarted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginRecStarted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateRecEnded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginRecEnded)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescriptionM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateRecStarted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginRecStarted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateRecEnded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginRecEnded)
+        </td>
+    </tr>
+}
+
+</table>
